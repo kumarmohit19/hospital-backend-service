@@ -1,24 +1,27 @@
 package com.example.project.Model;
 
-import lombok.Data;
-
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Setter
+@Getter
+@Data
 public class ApplicationUser {
     @Id
-    public String user_name;
+    public String username;
     public String user_email;
     public String password;
     public String user_mobile;
     public String location;
 
-    public ApplicationUser(String user_name, String user_email, String password, String user_mobile, String location) {
+    public ApplicationUser(String username, String user_email, String password, String user_mobile, String location) {
         super();
-        this.user_name = user_name;
+        this.username = username;
         this.user_email = user_email;
         this.password = password;
         this.user_mobile = user_mobile;
@@ -29,9 +32,9 @@ public class ApplicationUser {
         super();
     }
 
-    public ApplicationUser(String user_name, String password) {
+    public ApplicationUser(String username, String password) {
         super();
-        this.user_name = user_name;
+        this.username = username;
         this.password = password;
     }
 

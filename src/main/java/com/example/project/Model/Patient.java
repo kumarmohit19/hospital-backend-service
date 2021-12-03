@@ -7,14 +7,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
 @Data
+@Setter
+@Getter
 public class Patient {
-
+	
+	@Id
+	@GeneratedValue(generator = "uuid", strategy= GenerationType.SEQUENCE)
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
     private String patient_Id;
     private String patient_name;
     private String patient_email;
