@@ -55,12 +55,25 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.headers().frameOptions().sameOrigin().and().csrf().disable().authorizeRequests()
-				.antMatchers("/signin", "/register","/h2-console/**").permitAll().anyRequest().authenticated().and().exceptionHandling()
-				.authenticationEntryPoint((req, res, ex) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-						"UNAUTHORIZED : " + ex.getMessage()))
-				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-				.addFilterAfter(jwtAuthenticationFilter(),UsernamePasswordAuthenticationFilter.class
-						);
+		http
+			.headers()
+			.frameOptions()
+			.sameOrigin()
+			.and()
+			.csrf()
+			.disable()
+			.authorizeRequests()
+			.antMatchers("/signin", "/register","/h2-console/**")
+			.permitAll()
+			.anyRequest()
+			.authenticated()
+			.and()
+			.exceptionHandling()
+			.authenticationEntryPoint((req, res, ex) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "UNAUTHORIZED : " + ex.getMessage()))
+			.and()
+			.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and()
+			.addFilterAfter(jwtAuthenticationFilter(),UsernamePasswordAuthenticationFilter.class);
 	}
 }
